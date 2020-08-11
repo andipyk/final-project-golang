@@ -24,7 +24,6 @@ func dosenMain() {
 		menu(
 			"Lihat Daftar Mahasiswa",
 			"Input Data Mahasiswa",
-			"Show Data Kelas",
 		)
 		fmt.Scanln(&opt)
 
@@ -35,10 +34,6 @@ func dosenMain() {
 			fmt.Println("=====================================")
 		case 2:
 			inputDataMhs(c)
-		case 3:
-			var subj string
-			fmt.Println("Silahkan masukkan Kelas: ")
-			fmt.Scanln(&subj)
 
 		case 99:
 			fmt.Println("Sampai jumpa!")

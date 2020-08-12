@@ -13,10 +13,10 @@ import (
 	"google.golang.org/grpc"
 )
 
-func dosenMain() {
+func main() {
 	// var login = false
 	var opt int
-	c := ConnectServer()
+	c := connectServer()
 
 	// loginUser(login)
 
@@ -30,7 +30,7 @@ func dosenMain() {
 		switch opt {
 		case 1:
 			fmt.Println("=========== Data Mahasiswa =========")
-			listMahasiswa(c)
+			MhsGetAll(c)
 			fmt.Println("=====================================")
 		case 2:
 			inputDataMhs(c)
@@ -56,7 +56,7 @@ func menu(menu ...string) {
 	fmt.Println("Masukkan pilihan anda :")
 }
 
-func listMahasiswa(c pb.AdminServiceClient) {
+func MhsGetAll(c pb.AdminServiceClient) {
 	resStream, err := c.GetAllMhs(context.Background(), new(empty.Empty))
 	if err != nil {
 		log.Fatalf("Error when calling MhsGetAll: %s", err)
@@ -97,16 +97,17 @@ func inputDataMhs(c pb.AdminServiceClient) {
 	if err != nil {
 		log.Fatalf("Error when Input Data Mahasiswa: %s", err)
 	}
-	log.Printf("Response from server: %v\n", response)
+	log.Printf("Response from server: \n%v", response.GetResult())
 }
 
-// connection setup
-func ConnectServer() pb.AdminServiceClient {
+// ConnectServer ...
+
+func connectServer() pb.AdminServiceClient {
 	var conn *grpc.ClientConn
 	conn, err := grpc.Dial(":8080", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("it fails to connect: %v", err)
 	}
-	defer conn.Close()
+	// defer conn.Close()
 	return pb.NewAdminServiceClient(conn)
 }

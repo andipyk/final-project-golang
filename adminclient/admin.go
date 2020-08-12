@@ -22,9 +22,10 @@ func main() {
 	c := collegepb.NewAdminServiceClient(conn)
 
 	//demoMhs(c)
-	getAllDosen(c)
-	editDosen(c)
-	editKelas(c)
+	// getAllDosen(c)
+	MhsGetAll(c)
+	// editDosen(c)
+	// editKelas(c)
 }
 
 func getAllDosen(c collegepb.AdminServiceClient) {

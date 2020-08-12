@@ -182,7 +182,7 @@ func (s Server) UpdateDataMhs(ctx context.Context, request *collegepb.InputDataR
 		return response, nil
 	}
 	response := &collegepb.ResultResponse{
-		Result: "dosen id =" + id + " tidak ditemukan",
+		Result: "\nID mahasiswa = " + id + " tidak dapat ditemukan",
 	}
 
 	return response, nil
@@ -191,9 +191,13 @@ func (s Server) UpdateDataMhs(ctx context.Context, request *collegepb.InputDataR
 // ================================================================================== //
 
 func main() {
-	//mhsGenerator(5)
+	mhsGenerator(5)
 	kelas := []string{"algoritma", "dasar pemograman", "aljabar"}
 	dosenGenerator(kelas)
+
+	for _, getMhs := range mhs {
+		fmt.Println(getMhs)
+	}
 
 	fmt.Println("Go gRPC Beginners Tutorial!")
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", 8080))
@@ -414,7 +418,7 @@ func inputNilaiMhs(request *collegepb.InputDataReq, data resumeMhs) string {
 
 		dataMhs[subj] = data
 		fmt.Printf("Nilai Algoritma %s, telah di input dengan nilai %g\n", nama, inputN)
-		result = "Nilai dan absen" + subj + " " + nama + ", sukses di input!"
+		result = "Nilai dan absen " + subj + " " + nama + ", sukses di input!"
 
 	case "dasar pemrograman":
 		kelas[subj] = Kelas{
@@ -435,7 +439,7 @@ func inputNilaiMhs(request *collegepb.InputDataReq, data resumeMhs) string {
 		// masukkan ke map dataMhs
 		dataMhs[id] = data
 		fmt.Printf("Nilai Algoritma %s, telah di input dengan nilai %g\n", nama, inputN)
-		result = "Nilai dan absen" + subj + " " + nama + ", sukses di input!"
+		result = "Nilai dan absen " + subj + " " + nama + ", sukses di input!"
 
 	case "aljabar":
 		kelas[subj] = Kelas{
@@ -456,7 +460,7 @@ func inputNilaiMhs(request *collegepb.InputDataReq, data resumeMhs) string {
 		// masukkan ke map dataMhs
 		dataMhs[id] = data
 		fmt.Printf("Nilai Algoritma %s, telah di input dengan nilai %g\n", nama, inputN)
-		result = "Nilai dan absen" + subj + " " + nama + ", sukses di input!"
+		result = "Nilai dan absen " + subj + " " + nama + ", sukses di input!"
 	default:
 		fmt.Println("Pilihan yang anda masukkan tidak valid")
 		fmt.Println()
